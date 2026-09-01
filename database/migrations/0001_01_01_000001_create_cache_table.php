@@ -9,21 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('cache', function (Blueprint $table) {
-            $table->string('key')->primary();
-            $table->mediumText('value');
-            $table->bigInteger('expiration')->index();
-        });
-
-        Schema::create('cache_locks', function (Blueprint $table) {
-            $table->string('key')->primary();
-            $table->string('owner');
-            $table->bigInteger('expiration')->index();
-        });
-    }
-
+public function up(): void
+{
+    Schema::create('chirps', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+        $table->string('message', 255);
+        $table->timestamps();
+    });
+}
     /**
      * Reverse the migrations.
      */
